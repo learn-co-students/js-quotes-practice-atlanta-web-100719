@@ -42,7 +42,7 @@ window.addEventListener('DOMContentLoaded', () => {
         blockquote.appendChild(br);
 
         const span = document.createElement('span');
-        span.innerText = quote.likes.length
+        span.innerText = quote.likes ? quote.likes.length : 0
 
         const button1 = document.createElement('button');
         button1.className = 'btn-success';
@@ -77,8 +77,7 @@ window.addEventListener('DOMContentLoaded', () => {
             },
             body: JSON.stringify({
                 quote: newQuote,
-                author: author,
-                likes: []
+                author: author
             })
         })
             .then(res => res.json())
@@ -107,7 +106,8 @@ window.addEventListener('DOMContentLoaded', () => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                quoteId: quote.id
+                quoteId: quote.id,
+                createdAt: Math.floor(Date.now() / 1000)
             })
         })
             .then(res => res.json())
